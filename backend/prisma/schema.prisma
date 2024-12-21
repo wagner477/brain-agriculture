@@ -20,8 +20,32 @@ model User {
 
   password String
 
+  RuralProducer RuralProducer[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   roles UserRole[] @default([ADMIN])
+}
+
+enum DocumentType {
+  CPF
+  CNPJ
+}
+
+model RuralProducer {
+  id String @id @default(uuid())
+
+  name         String
+  documentType DocumentType
+  document     String       @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  @@index([name])
+  @@index([document])
 }
