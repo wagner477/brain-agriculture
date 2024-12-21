@@ -10,6 +10,7 @@ import { PrismaModule } from './providers/prisma/prisma.module';
 import { format, transports } from 'winston';
 
 import { WinstonModule } from 'nest-winston';
+import { RuralProducerModule } from './modules/rural-producer/rural-producer.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { WinstonModule } from 'nest-winston';
 
     PrismaModule,
     AuthenticationModule,
+    RuralProducerModule,
   ],
   controllers: [AppController],
   providers: [

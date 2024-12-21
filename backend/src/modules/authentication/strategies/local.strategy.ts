@@ -10,14 +10,14 @@ import { AuthenticationService } from '../authentication.service';
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private authenticationService: AuthenticationService) {
     super({
-      usernameField: 'email',
+      usernameField: 'username',
       passReqToCallback: true,
     });
   }
 
-  async validate(request: Request, email: string, password: string) {
-    return await this.authenticationService.checkEmailAndPassword(
-      email,
+  async validate(request: Request, username: string, password: string) {
+    return await this.authenticationService.checkUsernameAndPassword(
+      username,
       password,
     );
   }

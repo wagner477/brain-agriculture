@@ -28,20 +28,15 @@ model User {
   roles UserRole[] @default([ADMIN])
 }
 
-enum DocumentType {
-  CPF
-  CNPJ
-}
-
 model RuralProducer {
   id String @id @default(uuid())
 
-  name         String
-  documentType DocumentType
-  document     String       @unique
+  name     String
+  document String @unique
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?

@@ -14,13 +14,20 @@ export class AuthenticationService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async checkEmailAndPassword(
+  async checkUsernameAndPassword(
     username: string,
     password: string,
   ): Promise<UserSession> {
     const user = await this.prisma.user.findFirst({
       where: {
-        OR: [{ email: username }, { username }],
+        OR: [
+          {
+            email: username,
+          },
+          {
+            username,
+          },
+        ],
       },
       select: {
         id: true,
