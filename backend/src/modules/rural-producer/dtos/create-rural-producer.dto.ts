@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsCPFOrCNPJ } from 'brazilian-class-validator';
-import { IsString } from 'class-validator';
+import { IsString, ValidateIf } from 'class-validator';
 
 export class CreateRuralProducerDto {
   @ApiProperty({
@@ -14,6 +14,7 @@ export class CreateRuralProducerDto {
     description: 'Document of the rural producer',
     example: '123.456.789-00',
   })
+  @ValidateIf((_, value) => value !== undefined)
   @IsCPFOrCNPJ()
   document: string;
 }
